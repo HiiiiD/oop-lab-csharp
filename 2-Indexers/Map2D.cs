@@ -12,7 +12,7 @@ namespace Indexers
         private readonly IDictionary<TKey1, IDictionary<TKey2, TValue>> _values = new Dictionary<TKey1, IDictionary<TKey2, TValue>>();
 
         /// <inheritdoc cref="IMap2D{TKey1, TKey2, TValue}.NumberOfElements" />
-        public int NumberOfElements => GetElements().Count;
+        public int NumberOfElements => _values.Count;
 
         /// <inheritdoc cref="IMap2D{TKey1, TKey2, TValue}.this" />
         public TValue this[TKey1 key1, TKey2 key2]
@@ -72,7 +72,6 @@ namespace Indexers
         /// <inheritdoc cref="object.GetHashCode"/>
         public override int GetHashCode()
         {
-            // TODO: improve
             return base.GetHashCode();
         }
 
