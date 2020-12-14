@@ -2,6 +2,7 @@ namespace Iterators
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
 
     /// <summary>
     /// The static class declares extension methods which use the same naming used by Java 8 with Stream API.
@@ -16,7 +17,7 @@ namespace Iterators
         /// <typeparam name="TAny">the type of the items in the sequence.</typeparam>
         public static void ForEach<TAny>(this IEnumerable<TAny> sequence, Action<TAny> consumer)
         {
-            throw new NotImplementedException();
+            foreach (TAny elem in sequence) consumer.Invoke(elem);
         }
 
         /// <summary>
@@ -29,7 +30,8 @@ namespace Iterators
         /// <returns>the new sequence.</returns>
         public static IEnumerable<TAny> Peek<TAny>(this IEnumerable<TAny> sequence, Action<TAny> consumer)
         {
-            throw new NotImplementedException();
+            sequence.ForEach(consumer);
+            return sequence;
         }
 
         /// <summary>
@@ -43,7 +45,7 @@ namespace Iterators
         /// <returns>the new sequence.</returns>
         public static IEnumerable<TOther> Map<TAny, TOther>(this IEnumerable<TAny> sequence, Func<TAny, TOther> mapper)
         {
-            throw new NotImplementedException();
+            return sequence.Select(mapper);
         }
 
         /// <summary>
@@ -57,7 +59,7 @@ namespace Iterators
         /// <returns>the new sequence.</returns>
         public static IEnumerable<TAny> Filter<TAny>(this IEnumerable<TAny> sequence, Predicate<TAny> predicate)
         {
-            throw new NotImplementedException();
+            return sequence.Where(elem => predicate.Invoke(elem));
         }
 
         /// <summary>
@@ -68,7 +70,7 @@ namespace Iterators
         /// <returns>the new sequence.</returns>
         public static IEnumerable<Tuple<int, TAny>> Indexed<TAny>(this IEnumerable<TAny> sequence)
         {
-            throw new NotImplementedException();
+            return sequence.Select((value, index) => new Tuple<int, TAny>(index, value));
         }
 
         /// <summary>
@@ -83,7 +85,7 @@ namespace Iterators
         /// <returns>the new sequence.</returns>
         public static TOther Reduce<TAny, TOther>(this IEnumerable<TAny> sequence, TOther seed, Func<TOther, TAny, TOther> reducer)
         {
-            throw new NotImplementedException();
+            return sequence.Aggregate(seed, reducer);
         }
 
         /// <summary>
@@ -97,7 +99,7 @@ namespace Iterators
         /// <returns>the new sequence.</returns>
         public static IEnumerable<TAny> SkipWhile<TAny>(this IEnumerable<TAny> sequence, Predicate<TAny> predicate)
         {
-            throw new NotImplementedException();
+            return Enumerable.SkipWhile(sequence, (elem) => predicate.Invoke(elem));
         }
 
         /// <summary>
@@ -111,7 +113,7 @@ namespace Iterators
         /// <returns>the new sequence.</returns>
         public static IEnumerable<TAny> SkipSome<TAny>(this IEnumerable<TAny> sequence, long count)
         {
-            throw new NotImplementedException();
+            return sequence.Skip((int)count);
         }
 
         /// <summary>
@@ -126,7 +128,7 @@ namespace Iterators
         /// <returns>the new sequence.</returns>
         public static IEnumerable<TAny> TakeWhile<TAny>(this IEnumerable<TAny> sequence, Predicate<TAny> predicate)
         {
-            throw new NotImplementedException();
+            return Enumerable.TakeWhile(sequence, (elem) => predicate.Invoke(elem));
         }
 
         /// <summary>
@@ -139,7 +141,7 @@ namespace Iterators
         /// <returns>the new sequence.</returns>
         public static IEnumerable<TAny> TakeSome<TAny>(this IEnumerable<TAny> sequence, long count)
         {
-            throw new NotImplementedException();
+            return sequence.Take((int)count);
         }
 
         /// <summary>
@@ -149,7 +151,10 @@ namespace Iterators
         /// <returns>an infinite sequence of integers.</returns>
         public static IEnumerable<int> Integers(int start)
         {
-            throw new NotImplementedException();
+            for (int i = start; i <= Int32.MaxValue; i++)
+            {
+                yield return i;
+            }
         }
 
         /// <summary>
