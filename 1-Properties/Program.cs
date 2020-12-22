@@ -39,9 +39,11 @@ namespace Properties
         /// <inheritdoc cref="Program" />
         public static void Main()
         {
-            DeckFactory df = new DeckFactory();
-            df.Seeds = Enum.GetNames(typeof(ItalianNames)).ToList();
-            df.Names = Enum.GetNames(typeof(ItalianSeeds)).ToList();
+            DeckFactory df = new DeckFactory
+            {
+                Seeds = Enum.GetNames(typeof(ItalianNames)).ToList(),
+                Names = Enum.GetNames(typeof(ItalianSeeds)).ToList()
+            };
 
             Console.WriteLine("The {1} deck has {0} cards: ", df.DeckSize, "italian");
 

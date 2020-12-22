@@ -2,6 +2,7 @@ namespace Indexers
 {
     using System;
     using System.Collections.Generic;
+    using System.Data;
     using System.Diagnostics.CodeAnalysis;
     using System.Linq;
     using System.Text;
@@ -9,6 +10,7 @@ namespace Indexers
     /// <inheritdoc cref="IMap2D{TKey1,TKey2,TValue}" />
     public class Map2D<TKey1, TKey2, TValue> : IMap2D<TKey1, TKey2, TValue>
     {
+        //I don't like using tuples in a dictionary
         private readonly IDictionary<TKey1, IDictionary<TKey2, TValue>> _values = new Dictionary<TKey1, IDictionary<TKey2, TValue>>();
 
         /// <inheritdoc cref="IMap2D{TKey1, TKey2, TValue}.NumberOfElements" />
